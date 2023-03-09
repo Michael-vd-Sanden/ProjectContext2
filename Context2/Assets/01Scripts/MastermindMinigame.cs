@@ -24,6 +24,7 @@ public class MastermindMinigame : MonoBehaviour
     public void startMastermindMinigame()
     {
         minigameIsActive = true;
+        playRound = 0;
         for (int i = 0; i < 4; i++)
         {
             int r = Random.Range(0, 6);
@@ -33,6 +34,10 @@ public class MastermindMinigame : MonoBehaviour
         {
             Debug.Log(c);
         }
+        foreach(MasterRowScript m in Rows)
+        {
+            m.resetColours();
+        }
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.SetCursor(Cursors[selectedColour], Vector2.zero, CursorMode.Auto);
@@ -41,8 +46,9 @@ public class MastermindMinigame : MonoBehaviour
     }
     public void stopMastermindMinigame()
     {
-        minigameIsActive= false;
+        minigameIsActive = false;
         Cursor.lockState = CursorLockMode.Locked;
+        colourCode.Clear(); 
         minigameObject.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -67,6 +73,7 @@ public class MastermindMinigame : MonoBehaviour
 
     public void checkAnswer()
     {
+        giveScore();
         MasterRowScript m = Rows[playRound];
         List<Image> givenColours = m.giveColours();
         for(int i = 0; i < givenColours.Count; i++)
@@ -79,12 +86,66 @@ public class MastermindMinigame : MonoBehaviour
             if (givenColours[i].sprite.name != colourCode[i])
             {
                 Debug.Log("incorrect");
-                playRound++;
+                if (playRound != 8)
+                {
+                    playRound++;
+                }
+                else
+                {
+                    Debug.Log("you lose!");
+                    stopMastermindMinigame();
+                }
                 return;
             }
             
         }
         Debug.Log("you win!");
         stopMastermindMinigame();
+    }
+
+    public void giveScore()
+    {
+        int red = 0;
+        int black = 0;
+        int white = 0;
+        MasterRowScript m = Rows[playRound];
+        List<Image> givenColours = m.giveColours();
+        for (int i = 0; i < givenColours.Count; i++)
+        {
+            string check = givenColours[i].sprite.name;
+            if (check == colourCode[i])
+            {
+                red++;
+            }
+            else if(check == colourCode[0] || check == colourCode[1] || check == colourCode[2] || check == colourCode[3] )
+            {
+                black++;
+            }
+            else
+            {
+                white++;
+            }
+        }
+
+        Debug.Log(red + " " + black + " " + white);
+
+        for (int i = 0; i < m.checkColours.Count; i++)
+        {
+            if(red > 0)
+            {
+                m.checkColours[i].color = Color.red;
+                red --;
+            }
+            else if(black > 0) 
+            {
+                m.checkColours[i].color = Color.black;
+                black --;
+            }
+            else if (white > 0)
+            {
+                m.checkColours[i].color = Color.white;
+                white --;
+            }
+        }
     }
 }

@@ -10,8 +10,10 @@ public class MasterRowScript : MonoBehaviour
     private int round;
     public int rowIndex;
     public GameObject greybar;
+    public Sprite startImage;
 
     public List<Button> buttons;
+    public List<Image> checkColours;
 
     private void Update()
     {
@@ -43,5 +45,17 @@ public class MasterRowScript : MonoBehaviour
             
         }
         return colours;
+    }
+
+    public void resetColours()
+    {
+        foreach(Button b in buttons)
+        {
+            b.image.sprite = startImage;
+        }
+        foreach(Image i in checkColours)
+        {
+            i.color = Color.white;
+        }
     }
 }
