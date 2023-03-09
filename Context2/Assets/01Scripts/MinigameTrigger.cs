@@ -16,7 +16,10 @@ public class MinigameTrigger : MonoBehaviour
                 if(hit.transform.gameObject.tag == "MastermindTrigger")
                 {
                     //start mastermind Minigame
-                    mmMinigame.startMastermindMinigame();
+                    if (!mmMinigame.minigameIsActive)
+                    {
+                        mmMinigame.startMastermindMinigame();
+                    }
                 }
             }
         }
