@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,16 +26,19 @@ public class MastermindMinigame : MonoBehaviour
     {
         minigameIsActive = true;
         playRound = 0;
+
+        var colourCodeNames = new List<string>(colourNames);
         for (int i = 0; i < 4; i++)
         {
-            int r = Random.Range(0, 6);
-            colourCode.Add(colourNames[r]);
+            int r = Random.Range(0, colourCodeNames.Count);
+            colourCode.Add(colourCodeNames[r]);
+            colourCodeNames.RemoveAt(r);
         }
         foreach (string c in colourCode)
         {
             Debug.Log(c);
         }
-        foreach(MasterRowScript m in Rows)
+        foreach (MasterRowScript m in Rows)
         {
             m.resetColours();
         }
@@ -73,34 +77,50 @@ public class MastermindMinigame : MonoBehaviour
 
     public void checkAnswer()
     {
-        giveScore();
         MasterRowScript m = Rows[playRound];
         List<Image> givenColours = m.giveColours();
-        for(int i = 0; i < givenColours.Count; i++)
+        List<string> colourname = new List<string>();
+        foreach(Image img in givenColours)
         {
-            if (givenColours[i].sprite.name == "BtnEmpty")
-            {
-                Debug.Log("row not filled in correctly");
-                return;
-            }
-            if (givenColours[i].sprite.name != colourCode[i])
-            {
-                Debug.Log("incorrect");
-                if (playRound != 8)
-                {
-                    playRound++;
-                }
-                else
-                {
-                    Debug.Log("you lose!");
-                    stopMastermindMinigame();
-                }
-                return;
-            }
-            
+            colourname.Add(img.sprite.name);
         }
-        Debug.Log("you win!");
-        stopMastermindMinigame();
+
+        List<string> noDupes = colourname.Distinct().ToList();
+        if (noDupes.Count < 4)
+        {
+            Debug.Log("row not filled in correctly, duped");
+            return;
+        }
+        else
+        {
+            giveScore();
+        }
+        if (minigameIsActive)
+        {
+            for (int i = 0; i < givenColours.Count; i++)
+            {
+                if (givenColours[i].sprite.name == "BtnEmpty")
+                {
+                    Debug.Log("row not filled in correctly");
+                    return;
+                }
+                if (givenColours[i].sprite.name != colourCode[i])
+                {
+                    Debug.Log("incorrect");
+                    if (playRound != 8)
+                    {
+                        playRound++;
+                    }
+                    else
+                    {
+                        Debug.Log("you lose!");
+                        stopMastermindMinigame();
+                    }
+                    return;
+                }
+
+            }
+        }
     }
 
     public void giveScore()
@@ -125,6 +145,11 @@ public class MastermindMinigame : MonoBehaviour
             {
                 white++;
             }
+        }
+        if (red == 4)
+        {
+            stopMastermindMinigame();
+            Debug.Log("You won");
         }
 
         Debug.Log(red + " " + black + " " + white);
