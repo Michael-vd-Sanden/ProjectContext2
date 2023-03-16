@@ -18,14 +18,19 @@ public class MastermindMinigame : MonoBehaviour
     [SerializeField] private ColourIndex clickedColour;
 
     public int playRound = 0;
+    public Button nextButton;
 
     public List<string> colourNames;
     public List<string> colourCode;
+    public MasterCreatureScript masterCreature;
 
     public void startMastermindMinigame()
     {
         minigameIsActive = true;
+        masterCreature.hasTheirNeeds = false;
         playRound = 0;
+        nextButton.interactable = true;
+        masterCreature.RoundSelector();
 
         var colourCodeNames = new List<string>(colourNames);
         for (int i = 0; i < 4; i++)
@@ -77,48 +82,65 @@ public class MastermindMinigame : MonoBehaviour
 
     public void checkAnswer()
     {
-        MasterRowScript m = Rows[playRound];
-        List<Image> givenColours = m.giveColours();
-        List<string> colourname = new List<string>();
-        foreach(Image img in givenColours)
+        if (!masterCreature.hasTheirNeeds)
         {
-            colourname.Add(img.sprite.name);
-        }
-
-        List<string> noDupes = colourname.Distinct().ToList();
-        if (noDupes.Count < 4)
-        {
-            Debug.Log("row not filled in correctly, duped");
-            return;
-        }
-        else
-        {
-            giveScore();
-        }
-        if (minigameIsActive)
-        {
-            for (int i = 0; i < givenColours.Count; i++)
+            MasterRowScript m = Rows[playRound];
+            List<Image> givenColours = m.giveColours();
+            List<string> colourname = new List<string>();
+            foreach (Image img in givenColours)
             {
-                if (givenColours[i].sprite.name == "BtnEmpty")
-                {
-                    Debug.Log("row not filled in correctly");
-                    return;
-                }
-                if (givenColours[i].sprite.name != colourCode[i])
-                {
-                    Debug.Log("incorrect");
-                    if (playRound != 8)
-                    {
-                        playRound++;
-                    }
-                    else
-                    {
-                        Debug.Log("you lose!");
-                        stopMastermindMinigame();
-                    }
-                    return;
-                }
+                colourname.Add(img.sprite.name);
+            }
 
+            List<string> noDupes = colourname.Distinct().ToList();
+            if (noDupes.Count < 4)
+            {
+                Debug.Log("row not filled in correctly, duped");
+                return;
+            }
+            else
+            {
+                giveScore();
+            }
+            if (minigameIsActive)
+            {
+                for (int i = 0; i < givenColours.Count; i++)
+                {
+                    if (givenColours[i].sprite.name == "BtnEmpty")
+                    {
+                        Debug.Log("row not filled in correctly");
+                        return;
+                    }
+                    if (givenColours[i].sprite.name != colourCode[i])
+                    {
+                        Debug.Log("incorrect");
+                        if (playRound != 9)
+                        {
+                            playRound++;
+                        }
+                        else
+                        {
+                            Debug.Log("you lose!");
+                        }
+                        if(playRound > 8)
+                        {
+                            nextButton.interactable = false;
+                        }
+                        return;
+                    }
+
+                }
+            }
+        }
+        else if (masterCreature.hasTheirNeeds)
+        {
+            if (playRound != 9)
+            {
+                playRound++;
+            }
+            if (playRound > 8)
+            {
+                nextButton.interactable = false;
             }
         }
     }
@@ -148,8 +170,16 @@ public class MastermindMinigame : MonoBehaviour
         }
         if (red == 4)
         {
-            stopMastermindMinigame();
+            masterCreature.hasTheirNeeds = true;
             Debug.Log("You won");
+            if (playRound != 9)
+            {
+                playRound++;
+            }
+            if(playRound > 8)
+            {
+                nextButton.interactable = false;
+            }
         }
 
         Debug.Log(red + " " + black + " " + white);
@@ -171,6 +201,19 @@ public class MastermindMinigame : MonoBehaviour
                 m.checkColours[i].color = Color.white;
                 white --;
             }
+        }
+    }
+
+    public void clickedSubmit()
+    {
+        stopMastermindMinigame();
+        if(masterCreature.hasTheirNeeds)
+        {
+            //good ending
+        }
+        else
+        {
+            //bad ending
         }
     }
 }

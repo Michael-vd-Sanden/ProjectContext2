@@ -5,6 +5,7 @@ using UnityEngine;
 public class MinigameTrigger : MonoBehaviour
 {
     [SerializeField] private MastermindMinigame mmMinigame;
+    [SerializeField] private MasterCreatureScript mCreature;
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -15,6 +16,9 @@ public class MinigameTrigger : MonoBehaviour
             {
                 if(hit.transform.gameObject.tag == "MastermindTrigger")
                 {
+                    ColourIndex index = hit.transform.gameObject.GetComponentInParent<ColourIndex>();
+                    int level = index.colourIndex;
+                    mCreature.minigameLevel = level;
                     //start mastermind Minigame
                     if (!mmMinigame.minigameIsActive)
                     {
