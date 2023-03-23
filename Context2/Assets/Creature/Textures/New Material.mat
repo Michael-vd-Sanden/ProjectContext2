@@ -105,8 +105,12 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+<<<<<<< HEAD:Context2/Assets/Creature/New Material.mat
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
+=======
+    - _GlossMapScale: 0.742
+>>>>>>> ArtBranchSharon:Context2/Assets/Creature/Textures/New Material.mat
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
