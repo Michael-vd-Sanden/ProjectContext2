@@ -108,7 +108,16 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+<<<<<<< refs/remotes/origin/main
     - _Color: {r: 0.2546725, g: 0.47245896, b: 0.5566038, a: 1}
+=======
+<<<<<<< HEAD
+    - _Color: {r: 0.042986833, g: 0.13207549, b: 0.07558023, a: 1}
+=======
+    - _BaseColor: {r: 0.04298681, g: 0.13207546, b: 0.07558022, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+>>>>>>> parent of fc9e7af... Merge branch 'ArtBranchSharon' into main
+>>>>>>> Revert "Merge branch 'ArtBranchSharon' into main"
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

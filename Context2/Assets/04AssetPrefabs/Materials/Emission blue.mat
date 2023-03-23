@@ -124,5 +124,9 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0, g: 0.72599363, b: 1, a: 1}
     - _Color: {r: 0, g: 0.72599363, b: 1, a: 1}
-    - _EmissionColor: {r: 0.007961059, g: 0.8082744, b: 1.6877406, a: 1}
+    - _EmissionColor: {r: 0, g: 0.4745098, b: 1, a: 1}
+<<<<<<< HEAD
+=======
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+>>>>>>> parent of fc9e7af... Merge branch 'ArtBranchSharon' into main
   m_BuildTextureStacks: []
