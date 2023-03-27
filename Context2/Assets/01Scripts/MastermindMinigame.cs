@@ -26,6 +26,26 @@ public class MastermindMinigame : MonoBehaviour
     public List<string> colourCode;
     public MasterCreatureScript masterCreature;
 
+    public DialogueScript dialogue;
+
+    private void Start()
+    {
+        Cursor.SetCursor(Cursors[0], Vector2.zero, CursorMode.Auto);
+    }
+
+    private void Update()
+    {
+        if (minigameIsActive)
+        {
+            Time.timeScale = 0f;
+
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
+
     public void startMastermindMinigame()
     {
         minigameIsActive = true;
@@ -53,15 +73,14 @@ public class MastermindMinigame : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.SetCursor(Cursors[selectedColour], Vector2.zero, CursorMode.Auto);
         minigameObject.SetActive(true);
-        Time.timeScale = 0f;
     }
     public void stopMastermindMinigame()
     {
         minigameIsActive = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.SetCursor(Cursors[0], Vector2.zero, CursorMode.Auto);
         colourCode.Clear(); 
         minigameObject.SetActive(false);
-        Time.timeScale = 1f;
     }
 
     public void ClickedButton()
@@ -213,10 +232,12 @@ public class MastermindMinigame : MonoBehaviour
         if(masterCreature.hasTheirNeeds)
         {
             //good ending
+            dialogue.isGoodEnding = true;
         }
         else
         {
             //bad ending
+            dialogue.isGoodEnding = false;
         }
     }
 }

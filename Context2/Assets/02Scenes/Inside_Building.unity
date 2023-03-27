@@ -2157,7 +2157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1947301707319563714, guid: f631afb70f4a65847b9c4e33d02537f4, type: 3}
       propertyPath: m_Name
-      value: NPC_01
+      value: OA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947301707319563714, guid: f631afb70f4a65847b9c4e33d02537f4, type: 3}
+      propertyPath: m_TagString
+      value: OA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f631afb70f4a65847b9c4e33d02537f4, type: 3}

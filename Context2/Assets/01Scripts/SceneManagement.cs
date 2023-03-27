@@ -5,12 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    public void loadInside()
+    private void Start()
     {
         SceneManager.LoadScene("Inside_Building", LoadSceneMode.Additive);
-    }
-    public void loadOutside()
-    {
-        SceneManager.LoadScene("SharonScene", LoadSceneMode.Additive);
     }
 }
