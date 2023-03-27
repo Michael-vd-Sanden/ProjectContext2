@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Color = UnityEngine.Color;
 
 public class MastermindMinigame : MonoBehaviour
 {
@@ -193,7 +195,8 @@ public class MastermindMinigame : MonoBehaviour
             }
             else if(black > 0) 
             {
-                m.checkColours[i].color = Color.black;
+                Color32 nColor = new Color32(80, 80, 80, 255);
+                m.checkColours[i].color = nColor;
                 black --;
             }
             else if (white > 0)
