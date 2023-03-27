@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - MastermindTrigger
+  - GoInsideTrigger
+  - GoOutsideTrigger
   layers:
   - Default
   - TransparentFX

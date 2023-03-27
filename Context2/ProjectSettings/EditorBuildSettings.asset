@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/02Scenes/SharonScene.unity
+    guid: b6261a6f3217ec6428ae18763ab13af4
+  - enabled: 1
+    path: Assets/02Scenes/Inside_Building.unity
+    guid: b5994e6cae0163d40898071b0db88a8e
   m_configObjects: {}
