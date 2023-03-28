@@ -33,19 +33,6 @@ public class MastermindMinigame : MonoBehaviour
         Cursor.SetCursor(Cursors[0], Vector2.zero, CursorMode.Auto);
     }
 
-    private void Update()
-    {
-        if (minigameIsActive)
-        {
-            Time.timeScale = 0f;
-
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
-    }
-
     public void startMastermindMinigame()
     {
         minigameIsActive = true;

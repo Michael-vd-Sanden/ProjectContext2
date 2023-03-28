@@ -11,7 +11,8 @@ public class DialogueScript : MonoBehaviour
     public NPCConversation startingConvo;
     public NPCConversation breefingConvo;
     public bool hadBreefing = false;
-    public NPCConversation breefingAfterConvo;
+    public NPCConversation breefingAfterConvoGood;
+    public NPCConversation breefingAfterConvoBad;
     public bool hadBreefingAfter = false;
 
     [SerializeField] private MastermindMinigame mmm;
@@ -66,7 +67,14 @@ public class DialogueScript : MonoBehaviour
         }
         else if(hadBreefing && !hadBreefingAfter)
         {
-            manager.StartConversation(breefingAfterConvo);
+            if(isGoodEnding)
+            {
+                manager.StartConversation(breefingAfterConvoGood);
+            }
+            else
+            {
+                manager.StartConversation(breefingAfterConvoBad);
+            }
             hadBreefingAfter = true;
         }
     }

@@ -47,8 +47,13 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void triggerMinigame(int level)
+    public void startTrigger(int level)
     {
+        StartCoroutine(triggerMinigame(level));
+    }
+    public IEnumerator triggerMinigame(int level)
+    {
+        yield return new WaitForSecondsRealtime(1f);
         mCreature.minigameLevel = level;
         if(!mmMinigame.minigameIsActive)
         {
