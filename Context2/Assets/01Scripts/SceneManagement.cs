@@ -9,4 +9,20 @@ public class SceneManagement : MonoBehaviour
     {
         SceneManager.LoadScene("Inside_Building", LoadSceneMode.Additive);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+        Debug.Log("quit");
+    }
+
+    public void LoadAngryCreatures()
+    {
+        SceneManager.LoadScene("CAngry", LoadSceneMode.Additive);
+    }
+
+    public void LoadTreeCreatures()
+    {
+        SceneManager.LoadScene("CTree", LoadSceneMode.Additive);
+    }
 }

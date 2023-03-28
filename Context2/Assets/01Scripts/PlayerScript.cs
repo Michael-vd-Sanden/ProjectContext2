@@ -11,8 +11,11 @@ public class PlayerScript : MonoBehaviour
     public SceneManagement sceneManagement;
     public DialogueScript dialogue;
 
+    public GameObject blackScreen;
+
     [SerializeField] private MastermindMinigame mmMinigame;
     [SerializeField] private MasterCreatureScript mCreature;
+    [SerializeField] private GameObject podSpawn;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,8 +46,25 @@ public class PlayerScript : MonoBehaviour
                         dialogue.startBreefing();
                     }
                 }
+                if(hit.transform.gameObject.tag == "Creature")
+                {
+                    if(!dialogue.checkIfActive())
+                    {
+                        dialogue.startCreature();
+                    }
+                }
             }
         }
+    }
+
+    public void toggleBlackScreen()
+    {
+        blackScreen.SetActive(!blackScreen.activeSelf);
+    }
+    public void triggerAngry()
+    {
+        player.transform.position = podSpawn.transform.position;
+        dialogue.startAngry1();
     }
 
     public void startTrigger(int level)

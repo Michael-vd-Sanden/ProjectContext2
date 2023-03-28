@@ -15,6 +15,19 @@ public class DialogueScript : MonoBehaviour
     public NPCConversation breefingAfterConvoBad;
     public bool hadBreefingAfter = false;
 
+    public NPCConversation outsideBad;
+    public bool hadOutsideBad = false;
+    public NPCConversation creatureGoodConvo;
+    public NPCConversation creatureBadConvo;
+    public bool hadCreatureConvo = false;
+    public NPCConversation badEnding;
+    public bool hadBadEnding = false;
+    public NPCConversation badToGoodEnding;
+    public bool hadCreatureEndConvo = false;
+    public NPCConversation creatureMiniGood;
+    public NPCConversation creatureMiniBad;
+    public bool hadCreatureMini = false;
+
     [SerializeField] private MastermindMinigame mmm;
 
     private void Start()
@@ -63,7 +76,6 @@ public class DialogueScript : MonoBehaviour
         if (!hadBreefing)
         {
             manager.StartConversation(breefingConvo);
-            hadBreefing = true;
         }
         else if(hadBreefing && !hadBreefingAfter)
         {
@@ -75,8 +87,58 @@ public class DialogueScript : MonoBehaviour
             {
                 manager.StartConversation(breefingAfterConvoBad);
             }
-            hadBreefingAfter = true;
         }
+        hadBreefingAfter = true;
     }
 
+    public void startCreature()
+    {
+        if (isGoodEnding && !hadCreatureConvo)
+        {
+            manager.StartConversation(creatureGoodConvo);
+            hadCreatureConvo = true;
+        }
+        else if (!isGoodEnding && !hadCreatureConvo)
+        {
+            manager.StartConversation(creatureBadConvo);
+            hadCreatureConvo = true;
+            hadBadEnding = true;
+        }
+        else if (!isGoodEnding && hadBadEnding && !hadCreatureEndConvo)
+        {
+            manager.StartConversation(badEnding);
+            hadCreatureEndConvo = true;
+        }
+        else if(isGoodEnding && hadBadEnding && !hadCreatureEndConvo)
+        {
+            manager.StartConversation(badToGoodEnding);
+            hadCreatureEndConvo = true;
+        }
+        else if(!isGoodEnding && hadCreatureConvo && !hadCreatureMini)
+        {
+            manager.StartConversation(creatureMiniBad);
+            hadCreatureMini = true;
+        }
+        else if(isGoodEnding && hadCreatureConvo && !hadCreatureMini)
+        {
+            manager.StartConversation(creatureMiniGood);
+            hadCreatureMini = true;
+        }
+
+    }
+
+    public void startAngry1()
+    {
+        manager.EndConversation();
+        StartCoroutine(startAngry());
+    }
+    public IEnumerator startAngry()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if(!hadOutsideBad)
+        {
+            manager.StartConversation(outsideBad);
+        }
+        hadOutsideBad = true;
+    }
 }

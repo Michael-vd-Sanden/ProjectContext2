@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/02Scenes/Inside_Building.unity
     guid: b5994e6cae0163d40898071b0db88a8e
+  - enabled: 1
+    path: Assets/02Scenes/CAngry.unity
+    guid: 7782188e05ee58a44ad8b6b32b767332
+  - enabled: 1
+    path: Assets/02Scenes/CTree.unity
+    guid: b741e70df56469c46acacf3209afb73e
   m_configObjects: {}
