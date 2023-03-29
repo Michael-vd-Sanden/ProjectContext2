@@ -71,10 +71,12 @@ public class PlayerScript : MonoBehaviour
     public void goToPod()
     {
         player.transform.position = podSpawn.transform.position;
+        sceneManagement.setOutsideActive();
     }
     public void goInside()
     {
         player.transform.position = insideSpawn.transform.position;
+        sceneManagement.setInsideActive();
     }
     public void triggerAngry()
     {
