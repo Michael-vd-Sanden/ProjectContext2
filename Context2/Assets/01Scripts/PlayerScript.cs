@@ -22,12 +22,12 @@ public class PlayerScript : MonoBehaviour
         if(other.tag == "GoInsideTrigger")
         {
             player.transform.position = insideSpawn.transform.position;
-            //sceneManagement.loadInside();
+            sceneManagement.setInsideActive();
         }
         if(other.tag == "GoOutsideTrigger")
         {
             player.transform.position = outsideSpawn.transform.position;
-            //sceneManagement.loadOutside();
+            sceneManagement.setOutsideActive();
         }
     }
 
@@ -53,6 +53,13 @@ public class PlayerScript : MonoBehaviour
                         dialogue.startCreature();
                     }
                 }
+                if(hit.transform.gameObject.tag == "Worker")
+                {
+                    if(!dialogue.checkIfActive())
+                    {
+                        dialogue.startWorker();
+                    }
+                }
             }
         }
     }
@@ -61,9 +68,17 @@ public class PlayerScript : MonoBehaviour
     {
         blackScreen.SetActive(!blackScreen.activeSelf);
     }
-    public void triggerAngry()
+    public void goToPod()
     {
         player.transform.position = podSpawn.transform.position;
+    }
+    public void goInside()
+    {
+        player.transform.position = insideSpawn.transform.position;
+    }
+    public void triggerAngry()
+    {
+        goToPod();
         dialogue.startAngry1();
     }
 

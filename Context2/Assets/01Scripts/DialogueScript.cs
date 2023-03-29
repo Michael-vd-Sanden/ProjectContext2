@@ -28,6 +28,19 @@ public class DialogueScript : MonoBehaviour
     public NPCConversation creatureMiniBad;
     public bool hadCreatureMini = false;
 
+    public NPCConversation reportConvo;
+    public bool hadReport = false;
+    public NPCConversation workerOut;
+    public bool hadWorkerOut = false;
+    public NPCConversation OAOut;
+    public bool hadOAOut = false;
+    public NPCConversation creatureGeologist;
+    public bool hadGeologist = false;
+    public NPCConversation geologistAfter;
+    public bool hadGeologistAfter = false;
+    public NPCConversation OAEnd;
+    public bool hadOAEnd = false;
+
     [SerializeField] private MastermindMinigame mmm;
 
     private void Start()
@@ -54,6 +67,11 @@ public class DialogueScript : MonoBehaviour
         }
     }
 
+    public void switchGoodEnding()
+    {
+        isGoodEnding = !isGoodEnding;
+    }
+
     public bool checkIfActive()
     {
         if (manager.IsConversationActive)
@@ -76,6 +94,7 @@ public class DialogueScript : MonoBehaviour
         if (!hadBreefing)
         {
             manager.StartConversation(breefingConvo);
+            hadBreefing = true;
         }
         else if(hadBreefing && !hadBreefingAfter)
         {
@@ -87,8 +106,32 @@ public class DialogueScript : MonoBehaviour
             {
                 manager.StartConversation(breefingAfterConvoBad);
             }
+            hadBreefingAfter = true;
         }
-        hadBreefingAfter = true;
+        else if(!hadReport && hadBreefing && hadBreefingAfter && hadCreatureConvo)
+        {
+            manager.StartConversation(reportConvo);
+            hadReport = true;
+        }
+        else if(!hadOAOut && hadReport && hadBreefingAfter && hadBreefing)
+        {
+            manager.StartConversation(OAOut);
+            hadOAOut = true;
+        }
+        else if(!hadOAEnd && hadOAOut && hadReport && hadBreefingAfter && hadBreefing && hadGeologistAfter)
+        {
+            manager.StartConversation(OAEnd);
+            hadOAEnd = true;
+        }
+    }
+
+    public void startWorker()
+    {
+        if(!hadWorkerOut)
+        {
+            manager.StartConversation(workerOut);
+            hadWorkerOut = true;
+        }
     }
 
     public void startCreature()
@@ -97,6 +140,7 @@ public class DialogueScript : MonoBehaviour
         {
             manager.StartConversation(creatureGoodConvo);
             hadCreatureConvo = true;
+            hadCreatureEndConvo = true;
         }
         else if (!isGoodEnding && !hadCreatureConvo)
         {
@@ -123,6 +167,16 @@ public class DialogueScript : MonoBehaviour
         {
             manager.StartConversation(creatureMiniGood);
             hadCreatureMini = true;
+        }
+        else if (!hadGeologist && hadCreatureConvo && hadCreatureEndConvo && hadCreatureMini && hadReport && hadOAOut)
+        {
+            manager.StartConversation(creatureGeologist);
+            hadGeologist = true;
+        }
+        else if(!hadGeologistAfter && hadGeologist && hadCreatureConvo && hadCreatureEndConvo && hadCreatureMini)
+        {
+            manager.StartConversation(geologistAfter);
+            hadGeologistAfter = true;
         }
 
     }

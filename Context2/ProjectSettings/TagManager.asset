@@ -9,6 +9,7 @@ TagManager:
   - GoOutsideTrigger
   - OA
   - Creature
+  - Worker
   layers:
   - Default
   - TransparentFX

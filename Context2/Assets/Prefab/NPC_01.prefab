@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 1174846013391441784}
   - component: {fileID: 6758403860735127681}
   - component: {fileID: 5092947678028289282}
+  - component: {fileID: 2493035534435572458}
   m_Layer: 0
   m_Name: NPC_01
   m_TagString: Untagged
@@ -474,6 +475,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!65 &2493035534435572458
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947301707319563714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6775234, y: 6.7868986, z: 2.0081053}
+  m_Center: {x: 0, y: 3.0491712, z: 0}
 --- !u!1 &2314894004129521131
 GameObject:
   m_ObjectHideFlags: 0

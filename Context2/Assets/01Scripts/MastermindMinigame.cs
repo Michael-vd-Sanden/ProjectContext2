@@ -27,6 +27,7 @@ public class MastermindMinigame : MonoBehaviour
     public MasterCreatureScript masterCreature;
 
     public DialogueScript dialogue;
+    public SceneManagement sceneManagement;
 
     private void Start()
     {
@@ -129,6 +130,7 @@ public class MastermindMinigame : MonoBehaviour
                         else
                         {
                             Debug.Log("you lose!");
+                            sceneManagement.Quit();
                         }
                         if(playRound > 8)
                         {
